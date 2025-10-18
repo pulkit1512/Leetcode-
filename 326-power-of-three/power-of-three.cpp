@@ -1,15 +1,10 @@
 class Solution {
 public:
     bool isPowerOfThree(int n) {
-        int x=n;
-        if(n<0||n==0) return 0;
-        long long ans=1;
-        while(ans<=n){
-            if(ans==x) return 1;
-            ans=ans*3;
-            
-            
-        }
-        return 0;
+//         3^{19} = 1162261467
+// So if n is a power of 3, it must divide 1162261467 exactly
+
+        return n > 0 && 1162261467 % n == 0;
+        
     }
 };
