@@ -15,24 +15,24 @@ int getHeight(TreeNode* root) {
     if (!root) return 0;
     return 1 + max(getHeight(root->left), getHeight(root->right));
 }
-void dfs(TreeNode* node, int depth, int height, int &result, bool &found) {
+void dfs(TreeNode* node, int depth, int height, int &ans, bool &found) {
     if (!node || found) return;
 
-    if (depth == height && !found) {
-        result = node->val;
+    if (depth == height) {
+        ans = node->val;
         found = true; 
         return;
     }
 
-    dfs(node->left, depth + 1, height, result, found);
-    dfs(node->right, depth + 1, height, result, found);
+    dfs(node->left, depth + 1, height, ans, found);
+    dfs(node->right, depth + 1, height, ans, found);
 }
 
 int findBottomLeftValue(TreeNode* root) {
     int height = getHeight(root);
-    int result = -1;
+    int ans = -1;
     bool found = false;
-    dfs(root, 1, height, result, found);
-    return result;
+    dfs(root, 1, height,ans, found);
+    return ans;
 }
 };
