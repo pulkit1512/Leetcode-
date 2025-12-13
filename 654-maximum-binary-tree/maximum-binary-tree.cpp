@@ -15,7 +15,7 @@ public:
         if(start>end) return NULL;
         TreeNode*root=NULL;
         
-        int maxi=nums[start];
+        int maxi=INT_MIN;
         int index=start;
         for(int i=start;i<=end;i++){
            if(maxi<nums[i]){
