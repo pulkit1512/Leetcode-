@@ -1,19 +1,21 @@
 class Solution {
 public:
-    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
-        int ans =INT_MAX;
-        for(int i=0;i<landStartTime.size();i++){
-            for(int j=0;j<waterStartTime.size();j++){
-                int x1=landStartTime[i]+landDuration[i];
-                int y1=max(x1,waterStartTime[j]);
-                int z1=y1+waterDuration[j];
-
-                int x2=waterStartTime[j]+waterDuration[j];
-                int y2=max(x2,landStartTime[i]);
-                int z2=y2+landDuration[i];
-                ans=min({ans,z1,z2});
-            }
+    int solve(vector<int>& start1, vector<int>& duration1, vector<int>& start2,
+              vector<int>& duration2) {
+        int finish1 = INT_MAX;
+        for (int i = 0; i < start1.size(); i++) {
+            finish1 = min(finish1, start1[i] + duration1[i]);
         }
-        return ans;
+
+        int finish2 = INT_MAX;
+        for (int i = 0; i < start2.size(); i++) {
+            finish2 = min(finish2, max(start2[i], finish1) + duration2[i]);
+        }
+        return finish2;
+    }
+    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
+        int x1=solve(landStartTime, landDuration, waterStartTime, waterDuration);
+        int x2=solve(waterStartTime, waterDuration, landStartTime, landDuration);
+        return min(x1,x2);
     }
 };
