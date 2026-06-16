@@ -7,7 +7,7 @@ public:
                 result+=s[i];
             }
             else if(s[i]=='*'){
-                if(result.length()>0){
+                if(!result.empty()){
                 result.pop_back();
                 }
             }
