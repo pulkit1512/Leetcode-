@@ -6,16 +6,16 @@ public:
         bool temp2=false;
         int temp3=false;
         for (int i = 0; i < s.size(); i++) {
-            if (s[i] == ' ' && ans == 0&&!temp3&&!temp2)
+            if (s[i] == ' '&&!temp3&&!temp2)
                 continue;
             if(i>0&&s[i-1]=='0' &&s[i]=='-'&&ans==0) return 0;
-            if (s[i] == '-' && ans == 0&&!temp2&&!temp3) {
+            if (s[i] == '-'&&!temp2&&!temp3) {
                 sign = false;
                 temp2=true;
                 continue;
             }
 
-            if (s[i] == '+' && ans == 0&&!temp2&&!temp3) {
+            if (s[i] == '+' &&!temp2&&!temp3) {
                 sign = true;
                 temp2=true;
                 continue;
