@@ -5,7 +5,7 @@ public:
             ans.push_back(s);
             return ;
         }
-        if(c1<=n) helper(n,s+'(',c1+1,c2,ans);
+        if(c1<n) helper(n,s+'(',c1+1,c2,ans);
         
         if(c2<c1) helper(n,s+')',c1,c2+1,ans);
         
