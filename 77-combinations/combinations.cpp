@@ -5,7 +5,7 @@ public:
             ans.push_back(temp);
             return ;
         }
-        if(number>n||temp.size()>k) return ;
+        
         for(int i=number;i<=n;i++){
             temp.push_back(i);
             helper(n,k,i+1,temp,ans);
