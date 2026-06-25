@@ -1,15 +1,17 @@
 class Solution {
 public:
-    void helper(string digits,int d_index,int l_index,string temp,vector<string>&ans,vector<string>&mapping){
+    void helper(string digits,int d_index,string& temp,vector<string>&ans,vector<string>&mapping){
         if(temp.size()==digits.size()){
             ans.push_back(temp);
             return ;
         }
         string letter = mapping[digits[d_index] - '0'];
-
-        if(l_index==letter.size()) return ;
-        helper(digits,d_index+1,0,temp+letter[l_index],ans,mapping);
-        helper(digits,d_index,l_index+1,temp,ans,mapping);
+        for(int i=0;i<letter.size();i++){
+            temp.push_back(letter[i]);
+            helper(digits,d_index+1,temp,ans,mapping);
+            temp.pop_back();
+        }
+       
     }
     vector<string> letterCombinations(string digits) {
         if(digits.empty()) return {};
@@ -18,7 +20,8 @@ public:
             "mno", "pqrs","tuv", "wxyz"
         };
         vector<string>ans;
-        helper(digits,0,0,"",ans,mapping);
+        string temp="";
+        helper(digits,0,temp,ans,mapping);
         return ans;
     }
 };
