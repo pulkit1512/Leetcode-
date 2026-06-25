@@ -6,10 +6,11 @@ public:
             return ;
         }
         if(number>n||temp.size()>k) return ;
-        temp.push_back(number);
-        helper(n,k,number+1,temp,ans);
-        temp.pop_back();
-        helper(n,k,number+1,temp,ans);
+        for(int i=number;i<=n;i++){
+            temp.push_back(i);
+            helper(n,k,i+1,temp,ans);
+            temp.pop_back();
+        }
     }
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>>ans;
