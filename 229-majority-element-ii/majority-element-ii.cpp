@@ -1,34 +1,33 @@
 class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
-         
-        vector<int> ans;
-        int n = nums.size();
-        int count = 1;
-
-        sort(nums.begin(), nums.end()); // Group duplicates
-
-        if (n == 1) {
-            ans.push_back(nums[0]);
-            return ans;
-        }
-
-        for (int i = 0; i < n - 1; i++) {
-            if (nums[i] == nums[i + 1]) {
-                count++;
-            } else {
-                if (count > n / 3) {
-                    ans.push_back(nums[i]);
-                }
-                count = 1;
+        int count1=0,count2=0;
+        int c1,c2;
+        for(int i=0;i<nums.size();i++){
+            if(count1==0&&nums[i]!=c2){
+                count1++;
+                c1=nums[i];
+            }
+            else if(count2==0&&nums[i]!=c1){
+                count2++;
+                c2=nums[i];
+            }
+            else if(nums[i]==c1) count1++;
+            else if(nums[i]==c2) count2++;
+            else{
+                count1--;
+                count2--;
             }
         }
-
-        
-        if (count > n / 3) {
-            ans.push_back(nums[n - 1]);
+        int x1=0;
+        int x2=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==c1) x1++;
+            if(nums[i]==c2) x2++;
         }
-
-        return ans;
+        vector<int>Ans;
+        if(x1>nums.size()/3) Ans.push_back(c1);
+        if(x2>nums.size()/3) Ans.push_back(c2);
+        return Ans;
     }
 };
