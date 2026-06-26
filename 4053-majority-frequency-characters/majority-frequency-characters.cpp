@@ -14,13 +14,13 @@ public:
         for(auto it=m.begin();it!=m.end();it++){
                 s1[it->second]+=it->first;
                 
-                if(s1[it->second].size()>length){
-                    length=s1[it->second].size();
-                    index=it->second;
-                }
-                if(s1[it->second].size()==length){
-                   index=max(index,it->second);
-                }
+                
+        }
+        for(int i=0;i<=max_freq;i++){
+            if(s1[i].size()>=length){
+               length=s1[i].size();
+               index=i;
+            }
         }
         return s1[index];
 
