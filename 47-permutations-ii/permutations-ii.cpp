@@ -10,7 +10,7 @@ public:
                 if(i>0&&nums[i]==nums[i-1]&&!visited[i-1]) continue;
                 temp.push_back(nums[i]);
                 visited[i]=1;
-                helper(nums,index,temp,visited,ans);
+                helper(nums,index+1,temp,visited,ans);
                 visited[i]=0;
                 temp.pop_back();
             }
