@@ -1,26 +1,27 @@
 class Solution {
 public:
-    void helper(vector<int>& arr, int index, vector<vector<int>>& ans) {
-        if(index == arr.size()) {
-            ans.push_back(arr);
-            return;
+    void helper(vector<int>nums,int index,vector<int>&temp,vector<bool>&visited,vector<vector<int>>&ans){
+        if(temp.size()==nums.size()){
+            ans.push_back(temp);
+            return ;
         }
-        vector<bool>use(21,0);
-        for(int i = index; i < arr.size(); i++) {
-          if(use[arr[i]+10]==0){
-            swap(arr[i],arr[index]);
-            helper(arr,index+1,ans);
-            swap(arr[i],arr[index]);
-            use[arr[i]+10]=1;
-          }
-           
+        for(int i=0;i<nums.size();i++){
+            if(visited[i]==0){
+                if(i>0&&nums[i]==nums[i-1]&&!visited[i-1]) continue;
+                temp.push_back(nums[i]);
+                visited[i]=1;
+                helper(nums,index,temp,visited,ans);
+                visited[i]=0;
+                temp.pop_back();
+            }
         }
     }
-
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        
-        vector<vector<int>> ans;
-        helper(nums, 0, ans);
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans;
+        vector<bool>visited(nums.size(),0);
+        vector<int>temp;
+        helper(nums,0,temp,visited,ans);
         return ans;
     }
 };
