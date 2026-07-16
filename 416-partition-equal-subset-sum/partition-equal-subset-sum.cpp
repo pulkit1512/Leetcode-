@@ -4,19 +4,23 @@ public:
         // code here
         int n=arr.size();
         int ans=0;
-        vector<vector<int>>dp(n+1,vector<int>(sum+1,0));
-        for(int i=0;i<=n;i++){
-            dp[i][0]=1;
-        }
+        vector<int>dp(sum+1,0);
+        dp[0]=1;
+        // for(int i=0;i<=n;i++){
+        //     dp[i][0]=1;
+        // }
         for(int i=1;i<=n;i++){
+            vector<int>dp2(sum+1,0);
+            dp2[0]=1;
             for(int j=1;j<=sum;j++){
                 
-                if(j-arr[i-1]<0) dp[i][j]=dp[i-1][j];
-                else dp[i][j]=dp[i-1][j-arr[i-1]]||dp[i-1][j];
+                if(j-arr[i-1]<0) dp2[j]=dp[j];
+                else dp2[j]=dp[j-arr[i-1]]||dp[j];
             }
-            if(dp[i][sum]) return 1;
+            dp=dp2;
+            if(dp[sum]) return 1;
         }
-        return dp[n][sum];    
+        return 0; 
         
     }
     bool canPartition(vector<int>& nums) {
@@ -26,7 +30,6 @@ public:
         }
         int n=nums.size();
         if (sum % 2 == 0) {
-            
             return find(nums, sum/2);
         }
         return 0;
