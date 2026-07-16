@@ -20,7 +20,7 @@ public:
             dp=dp2;
             if(dp[sum]) return 1;
         }
-        return 0; 
+        return dp[sum];    
         
     }
     bool canPartition(vector<int>& nums) {
