@@ -1,16 +1,23 @@
 class Solution {
 public:
-    bool find(vector<int>& arr, int target, int index,
-              vector<vector<int>>& dp) {
-        if (target == 0)
-            return 1;
-        if (index < 0 || target < 0)
-            return 0;
-        if (dp[index][target] != -1)
-            return dp[index][target];
-        return dp[index][target] =
-                   find(arr, target - arr[index], index - 1, dp) ||
-                   find(arr, target, index - 1, dp);
+    bool find(vector<int>& arr, int sum) {
+        // code here
+        int n=arr.size();
+        int ans=0;
+        vector<vector<int>>dp(n+1,vector<int>(sum+1,0));
+        for(int i=0;i<=n;i++){
+            dp[i][0]=1;
+        }
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=sum;j++){
+                
+                if(j-arr[i-1]<0) dp[i][j]=dp[i-1][j];
+                else dp[i][j]=dp[i-1][j-arr[i-1]]||dp[i-1][j];
+            }
+            if(dp[i][sum]) return 1;
+        }
+        return dp[n][sum];    
+        
     }
     bool canPartition(vector<int>& nums) {
         int sum = 0;
@@ -19,8 +26,8 @@ public:
         }
         int n=nums.size();
         if (sum % 2 == 0) {
-            vector<vector<int>> dp(n, vector<int>(sum/2+1,-1));
-            return find(nums, sum/2, nums.size() - 1, dp);
+            
+            return find(nums, sum/2);
         }
         return 0;
     }
