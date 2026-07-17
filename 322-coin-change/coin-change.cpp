@@ -1,29 +1,19 @@
 class Solution {
 public:
-    int find(int index,int amount,vector<int>&coins,vector<vector<int>>&dp){
-        if(amount==0) return 0 ;
-        if(index<0) return 1e9;
-        if(dp[index][amount]!=-1) return dp[index][amount];
-        if(coins[index]>amount) return dp[index][amount]=find(index-1,amount,coins,dp);
-        else{
-            return dp[index][amount]=min(1+find(index,amount-coins[index],coins,dp),find(index-1,amount,coins,dp));
-        }
-    } 
     int coinChange(vector<int>& coins, int amount) {
         int n=coins.size();
-        vector<vector<int>>dp(n+1,vector<int>(amount+1,1e8));
-        for(int i=0;i<=n;i++){
-            dp[i][0]=0;
-        }
+        vector<int>dp(amount+1,1e8);
+            dp[0]=0;
+        
         for(int i=1;i<=n;i++){
             for(int j=1;j<=amount;j++){
-                if(coins[i-1]>j) dp[i][j]=dp[i-1][j];
+                if(coins[i-1]>j) dp[j]=dp[j];
                 else{
-                    dp[i][j]=min(1+dp[i][j-coins[i-1]],dp[i-1][j]);
+                    dp[j]=min(1+dp[j-coins[i-1]],dp[j]);
                 }
             }
         }
-        if(dp[n][amount]==1e8) return -1;
-        return dp[n][amount];
+        if(dp[amount]==1e8) return -1;
+        return dp[amount];
     }
 };
