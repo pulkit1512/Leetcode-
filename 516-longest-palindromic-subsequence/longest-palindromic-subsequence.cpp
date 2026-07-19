@@ -3,16 +3,20 @@ public:
     int find(string s1,string s2){
         int n=s1.size();
 
-        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+        vector<int>dp(n+1,0);
+        int prev,curr;
         for(int i=1;i<=n;i++){
+            prev=0,curr=0;
             for(int j=1;j<=n;j++){
+                prev=curr;
+                curr=dp[j];
                 if(s1[i-1]==s2[j-1]){
-                    dp[i][j]=1+dp[i-1][j-1];
+                    dp[j]=1+prev;
                 }
-                else dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                else dp[j]=max(dp[j],dp[j-1]);
             }
         }
-        return dp[n][n];
+        return dp[n];
     }
     int longestPalindromeSubseq(string s) {
         int n=s.size();
