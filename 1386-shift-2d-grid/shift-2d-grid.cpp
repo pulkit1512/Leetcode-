@@ -5,9 +5,9 @@ public:
         int m = grid[0].size();
         int total = n * m;
         k = k % total;
-        
+        vector<vector<int>> ans(n, vector<int>(m, 0));
         while (k--) {
-            vector<vector<int>> ans(n, vector<int>(m, 0));
+            
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
                     if (i == n - 1 && j == m - 1) {
