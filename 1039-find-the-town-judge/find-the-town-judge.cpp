@@ -19,7 +19,7 @@ public:
                 count++;
             }
         }
-        if(count==1) return ans+1;
+        if(ans!=-1) return ans+1;
         return -1;
     }
 };
