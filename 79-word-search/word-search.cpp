@@ -8,7 +8,7 @@ public:
     bool helper(vector<vector<char>>& board, string word,vector<vector<bool>>&visited,int m,int n,string &temp,int i,int j){
         if(temp != word.substr(0, temp.length())) return false;
         if(temp==word) return true;
-        if(i==m&&j==m) return false;
+        if(i==m&&j==n) return false;
         visited[i][j]=1;
         for(int k=0;k<4;k++){
             if(valid(i+row[k],j+col[k],m,n)&&!visited[i+row[k]][j+col[k]]){
