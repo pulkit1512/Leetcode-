@@ -13,8 +13,8 @@ public:
             indegree[v]++;
         }
 
-        // now apply cycle detection in a directed graph if there is cycle
-        // return true if there is no cycle and false if it is 
+
+        
         queue<int>q;
         for(int i=0;i<numCourses;i++){
             if(indegree[i]==0){
