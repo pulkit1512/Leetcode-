@@ -1,38 +1,33 @@
-int row[4] = {-1, 1, 0, 0};
-int col[4] = {0, 0, -1, 1};
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
         int n = mat.size();
         int m = mat[0].size();
-        vector<vector<int>> ans(n, vector<int>(m));
-        vector<vector<bool>> visited(n, vector<bool>(m, 0));
-        queue<tuple<int, int, int>> q;
-        for (int i = 0; i <n;i++){
-            for(int j=0;j<m;j++){
-                if(mat[i][j]==0){
-                    q.push({i,j,0});
-                    visited[i][j]=1;
+        vector<vector<int>>dp(n, vector<int>(m, 1e9));
+
+        for (int i = 0;i<n;i++) {
+            for(int j = 0;j<m;j++) {
+                if (mat[i][j]) {
+                    int top = (i>0) ? dp[i-1][j] : 1e9;
+                    int left = (j>0) ? dp[i][j-1]: 1e9;
+                    dp[i][j] = min(top, left) + 1;
+                } else {
+                    dp[i][j] = 0;
                 }
             }
         }
-            
-        
-        while (!q.empty()) {
-            auto [x, y, steps] = q.front();
-            q.pop();
-            ans[x][y]=steps;
-            for (int k = 0; k < 4; k++) {
-                int r = x + row[k];
-                int c = y + col[k];
-                if (r >= 0 && r < n && c >= 0 && c < m) {
-                    if (!visited[r][c]) {
-                        q.push({r, c, steps + 1});
-                        visited[r][c] = 1;
-                    }
+
+        for (int i = n-1;i>=0;i--) {
+            for(int j = m-1;j>=0;j--) {
+                if (mat[i][j]) {
+                    int bottom = (i< n-1) ? dp[i+1][j] : 1e9;
+                    int right = (j < m-1) ? dp[i][j+1] : 1e9;
+
+                    dp[i][j] = min(dp[i][j], min(bottom, right) + 1); 
                 }
             }
         }
-        return ans;
+
+        return dp;
     }
 };
