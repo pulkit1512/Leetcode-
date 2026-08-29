@@ -11,7 +11,7 @@ public:
     int minimumTotal(vector<vector<int>>& triangle) {
         int n=triangle.size();
         int m=triangle[n-1].size();
-        vector<vector<long long>>dp(n+1,vector<long long>(m+1,INT_MAX));
+        vector<vector<long long>>dp(n+1,vector<long long>(n+1,INT_MAX));
 
         for(int i=1;i<=n;i++){
             for(int j=1;j<=triangle[i-1].size();j++){
