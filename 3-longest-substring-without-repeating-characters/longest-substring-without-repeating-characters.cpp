@@ -17,8 +17,9 @@ public:
             }
 
             freq[s[second]]++;
-            ans = max(ans, second - first + 1);
             second++;
+            ans = max(ans, second - first);
+        
         }
         return ans;
     }
