@@ -12,8 +12,8 @@ public:
             }
             end++;
         }
-        if(ans==INT_MAX) return 0;
-        return ans;
+        // if(ans==INT_MAX) return 0;
+        return ans==INT_MAX?0:ans;
 
     }
 };
