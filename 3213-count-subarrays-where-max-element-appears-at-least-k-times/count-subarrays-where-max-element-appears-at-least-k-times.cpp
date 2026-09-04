@@ -1,7 +1,7 @@
 class Solution {
 public:
     long long countSubarrays(vector<int>& nums, int k) {
-        unordered_map<int,int>m;
+         int count=0;
         
         int start=0,end=0,maxi=INT_MIN;
         long long ans=0;
@@ -9,10 +9,10 @@ public:
             maxi=max(maxi,nums[i]);
         }
         while(end<nums.size()){
-            m[nums[end]]++;
-            while(m[maxi]>=k){
+            if(nums[end]==maxi) count++;
+            while(count>=k){
                 ans+=nums.size()-end;
-                m[nums[start]]--;
+                if(nums[start]==maxi) count--;
                 start++;
             }
             end++;
