@@ -1,26 +1,27 @@
 class Solution {
 public:
-    int find(vector<int>&nums,int k){
+    int find(vector<int>& nums,int k){
         unordered_map<int,int>m;
-
-        int start=0,end=0,total=0;
+        int first=0,second=0;
         int count=0;
-        while(end<nums.size()&&start<=end){
-            if(m[nums[end]]==0) count++;
-            m[nums[end]]++;
-            while(count>=k){
-                total+=nums.size()-end;
-                m[nums[start]]--;
-                if(m[nums[start]]==0) count--;
-                start++;
+        int ans=0;
+        while(second<nums.size()){
+            if(m[nums[second]]==0) count++;
+            m[nums[second]]++;
+            while(count==k&&first<=second){
+                ans+=nums.size()-second;
+                m[nums[first]]--;
+                if(m[nums[first]]==0) count--;
+                first++;
             }
-            end++;
+            second++;
         }
-        return total;
+        return ans;
+
     }
     int subarraysWithKDistinct(vector<int>& nums, int k) {
-         int x=find(nums,k);
-         int y=find(nums,k+1);
-         return x-y;      
+        int x=find(nums,k);
+        int y=find(nums,k+1);
+        return x-y;
     }
 };
