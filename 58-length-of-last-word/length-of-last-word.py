@@ -2,11 +2,12 @@ class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         i=len(s)-1
         ans=""
+        count=0
         while(i>=0):
-            while s[i]==' ' and i>=0 and len(ans)==0:
+            while i>=0 and s[i]==' ':
                 i-=1
-            if s[i]==' ' and len(ans)!=0:
-                break
-            ans+=s[i]
-            i-=1
-        return len(ans)        
+            while i>=0 and s[i]!=' ':
+                count+=1 
+                i-=1
+            break       
+        return count         
